@@ -1,0 +1,498 @@
+openapi: 3.0.3
+info:
+  title: API Yaprofi
+  version: 1.0.0
+paths:
+  /promo/:
+    get:
+      operationId: promo_list
+      tags:
+      - promo
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PromoMinSer'
+          description: ''
+    post:
+      operationId: promo_create
+      tags:
+      - promo
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PromoMinSer'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PromoMinSer'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PromoMinSer'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                type: integer
+          description: ''
+        '422':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
+  /promo/{id}/:
+    get:
+      operationId: promo_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this promo.
+        required: true
+      tags:
+      - promo
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PromoSer'
+          description: ''
+    put:
+      operationId: promo_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this promo.
+        required: true
+      tags:
+      - promo
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PromoMinSer'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PromoMinSer'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PromoMinSer'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '206':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PromoMinSer'
+          description: ''
+    delete:
+      operationId: promo_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this promo.
+        required: true
+      tags:
+      - promo
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '204':
+          description: No response body
+  /promo/{id}/participant/:
+    post:
+      operationId: promo_participant_create
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this promo.
+        required: true
+      tags:
+      - promo
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          description: No response body
+  /promo/{id}/participant/{participant_id}/:
+    delete:
+      operationId: promo_participant_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this promo.
+        required: true
+      - in: path
+        name: participant_id
+        schema:
+          type: string
+        required: true
+      tags:
+      - promo
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '204':
+          description: No response body
+  /promo/{id}/participant/{prize_pk}/:
+    delete:
+      operationId: promo_participant_destroy_2
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this promo.
+        required: true
+      - in: path
+        name: prize_pk
+        schema:
+          type: string
+        required: true
+      tags:
+      - promo
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '204':
+          description: No response body
+  /promo/{id}/prize/:
+    post:
+      operationId: promo_prize_create
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this promo.
+        required: true
+      tags:
+      - promo
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PrizeSer'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PrizeSer'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PrizeSer'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '204':
+          content:
+            application/json:
+              schema:
+                type: integer
+          description: ''
+        '422':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
+  /promo/{id}/rafle/:
+    post:
+      operationId: promo_rafle_create
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this promo.
+        required: true
+      tags:
+      - promo
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ParticipantSer'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ParticipantSer'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ParticipantSer'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                type: integer
+          description: ''
+        '422':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
+  /schema/:
+    get:
+      operationId: schema_retrieve
+      description: |-
+        OpenApi3 schema for this API. Format can be selected via content negotiation.
+
+        - YAML: application/vnd.oai.openapi
+        - JSON: application/vnd.oai.openapi+json
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - yaml
+      - in: query
+        name: lang
+        schema:
+          type: string
+          enum:
+          - af
+          - ar
+          - ar-dz
+          - ast
+          - az
+          - be
+          - bg
+          - bn
+          - br
+          - bs
+          - ca
+          - cs
+          - cy
+          - da
+          - de
+          - dsb
+          - el
+          - en
+          - en-au
+          - en-gb
+          - eo
+          - es
+          - es-ar
+          - es-co
+          - es-mx
+          - es-ni
+          - es-ve
+          - et
+          - eu
+          - fa
+          - fi
+          - fr
+          - fy
+          - ga
+          - gd
+          - gl
+          - he
+          - hi
+          - hr
+          - hsb
+          - hu
+          - hy
+          - ia
+          - id
+          - ig
+          - io
+          - is
+          - it
+          - ja
+          - ka
+          - kab
+          - kk
+          - km
+          - kn
+          - ko
+          - ky
+          - lb
+          - lt
+          - lv
+          - mk
+          - ml
+          - mn
+          - mr
+          - ms
+          - my
+          - nb
+          - ne
+          - nl
+          - nn
+          - os
+          - pa
+          - pl
+          - pt
+          - pt-br
+          - ro
+          - ru
+          - sk
+          - sl
+          - sq
+          - sr
+          - sr-latn
+          - sv
+          - sw
+          - ta
+          - te
+          - tg
+          - th
+          - tk
+          - tr
+          - tt
+          - udm
+          - uk
+          - ur
+          - uz
+          - vi
+          - zh-hans
+          - zh-hant
+      tags:
+      - schema
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/vnd.oai.openapi:
+              schema:
+                type: object
+                additionalProperties: {}
+            application/yaml:
+              schema:
+                type: object
+                additionalProperties: {}
+            application/vnd.oai.openapi+json:
+              schema:
+                type: object
+                additionalProperties: {}
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
+components:
+  schemas:
+    ParticipantSer:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 80
+      required:
+      - id
+      - name
+    PrizeSer:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        description:
+          type: string
+      required:
+      - description
+      - id
+    PromoMinSer:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 80
+        description:
+          type: string
+      required:
+      - id
+      - name
+    PromoSer:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 80
+        description:
+          type: string
+        prizes:
+          type: array
+          items:
+            $ref: '#/components/schemas/PrizeSer'
+        participants:
+          type: array
+          items:
+            $ref: '#/components/schemas/ParticipantSer'
+      required:
+      - id
+      - name
+      - participants
+      - prizes
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: sessionid
